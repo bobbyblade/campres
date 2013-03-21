@@ -26,7 +26,10 @@ function FreeResurrector:Resurrect(dude)
 		
         SaveGame(SAVE_NAMES.slots[Settings.save_slot].latest, function() dude.profile:Save() end)
         
-        dude:ListenForEvent("animover", function(inst) 
+        dude:ListenForEvent("animover", function(inst)
+			if inst.sg:HasStateTag("idle") then
+				inst:RemoveEventCallback("animover")
+			end
             self.inst:Show()
             if dude.HUD then
                 dude.HUD:Show()
