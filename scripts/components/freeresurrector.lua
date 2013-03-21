@@ -21,20 +21,8 @@ function FreeResurrector:Resurrect(dude)
         dude:Show()
         --self.inst:Hide()
         --self.inst.AnimState:PlayAnimation("debris")
-		if dude.components.hunger then
-			dude.components.hunger:SetPercent(1)
-		end
-
-		if dude.components.health then
-			--dude.components.health:RemovePenalty()
-		dude.components.health:SetPercent(1)
-		end
-		
-		if dude.components.sanity then
-			dude.components.sanity:SetPercent(1)
-		end
-
-        dude.sg:GoToState("wakeup")
+        
+        dude.sg:GoToState("amulet_rebirth")
 		
         SaveGame(SAVE_NAMES.slots[Settings.save_slot].latest, function() dude.profile:Save() end)
         
@@ -45,6 +33,18 @@ function FreeResurrector:Resurrect(dude)
             end
             TheCamera:SetDefault()
             self.inst:RemoveTag("busy")
+			if dude.components.hunger then
+				dude.components.hunger:SetPercent(1)
+			end
+	
+			if dude.components.health then
+				--dude.components.health:RemovePenalty()
+				dude.components.health:SetPercent(1)
+			end
+			
+			if dude.components.sanity then
+				dude.components.sanity:SetPercent(1)
+			end
         end)
         
     end)
