@@ -1,0 +1,1 @@
+Simple Don't Starve mod that automatically respawns you at a Fire Pit.
