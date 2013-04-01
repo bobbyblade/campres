@@ -24,7 +24,7 @@ function FreeResurrector:Resurrect(dude)
         
         dude.sg:GoToState("amulet_rebirth")
 		
-        SaveGame(SAVE_NAMES.slots[Settings.save_slot].latest, function() dude.profile:Save() end)
+        --SaveGameIndex:SaveCurrent()
         
         dude:ListenForEvent("animover", function(inst)
 			if inst.sg:HasStateTag("idle") then
