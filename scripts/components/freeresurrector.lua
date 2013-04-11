@@ -25,10 +25,10 @@ function FreeResurrector:Resurrect(dude)
         dude.sg:GoToState("amulet_rebirth")
 		
         --SaveGameIndex:SaveCurrent()
-        
-        dude:ListenForEvent("animover", function(inst)
+		local campreshealupfn
+        campreshealupfn = function(inst)
 			if inst.sg:HasStateTag("idle") then
-				inst:RemoveEventCallback("animover")
+				inst:RemoveEventCallback("animover", campreshealupfn)
 			end
             self.inst:Show()
             if dude.HUD then
@@ -48,7 +48,8 @@ function FreeResurrector:Resurrect(dude)
 			if dude.components.sanity then
 				dude.components.sanity:SetPercent(1)
 			end
-        end)
+		end
+        dude:ListenForEvent("animover", campreshealupfn)
         
     end)
    
